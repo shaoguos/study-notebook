@@ -16,10 +16,9 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-
 # -- Project information -----------------------------------------------------
 
-project = '量化交易'
+project = '爱折腾的木头哥'
 copyright = '2019, 木头哥'
 author = '木头哥'
 
@@ -48,7 +47,11 @@ templates_path = ['_templates']
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+from recommonmark.parser import CommonMarkParser
+source_parsers = {
+    '.md': CommonMarkParser,
+}
+source_suffix = ['.rst', '.md']
 
 # The master toctree document.
 master_doc = 'index'
@@ -74,7 +77,9 @@ pygments_style = None
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+import sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"
+html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -128,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'sphinx.tex', '量化交易 Documentation',
+    (master_doc, 'sphinx.tex', '爱折腾的木头哥 Documentation',
      '木头哥', 'manual'),
 ]
 
@@ -138,7 +143,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'sphinx', '量化交易 Documentation',
+    (master_doc, 'sphinx', '爱折腾的木头哥 Documentation',
      [author], 1)
 ]
 
@@ -149,7 +154,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'sphinx', '量化交易 Documentation',
+    (master_doc, 'sphinx', '爱折腾的木头哥 Documentation',
      author, 'sphinx', 'One line description of project.',
      'Miscellaneous'),
 ]
