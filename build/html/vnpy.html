@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>centos7.6 搭建vnpy量化交易环境 &mdash; 爱折腾的木头哥  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Indices and tables" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> 爱折腾的木头哥
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">centos7.6 搭建vnpy量化交易环境</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#centos7-6-python">centos7.6 安装python环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#centos7-6">centos7.6 安装桌面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#centos7-6-vncserver">centos7.6 安装vncserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#centos7-6-vscode">centos7.6 安装vscode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#centos7-6-gcc9-1-0">centos7.6 升级gcc9.1.0版本</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">centos7.6 编译vnpy</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">爱折腾的木头哥</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>centos7.6 搭建vnpy量化交易环境</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/vnpy.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="centos7-6-vnpy">
+<h1>centos7.6 搭建vnpy量化交易环境<a class="headerlink" href="#centos7-6-vnpy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="centos7-6-python">
+<h2>centos7.6 安装python环境<a class="headerlink" href="#centos7-6-python" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在anaconda.com官网下载安装包，这里需要下载linux版本的x86_64位的包</span>
+bash Anaconda3-2019.07-Linux-x86_64.sh
+<span class="c1"># 如果不修改安装路径的话，按照默认设置即可。</span>
+<span class="c1"># 安装过anaconda后，需要将/root/.bashrc中的关于anaconda的部分屏蔽掉，不然后面vncserver无法正常启动。</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos7-6">
+<h2>centos7.6 安装桌面<a class="headerlink" href="#centos7-6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum groups install <span class="s2">&quot;X Window System&quot;</span> -y
+yum install epel-release -y
+yum groups install <span class="s2">&quot;MATE Desktop&quot;</span> -y
+systemctl set-default graphical.target
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos7-6-vncserver">
+<h2>centos7.6 安装vncserver<a class="headerlink" href="#centos7-6-vncserver" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>yum install tigervnc-server -y
+
+<span class="c1"># 替换User为root，增加显示分辨率参数设置</span>
+sed -r -i <span class="s2">&quot;s/^(ExecStart.*)&lt;USER&gt;(.*%i)/\1root\2 -geometry 1920x1200 -depth 16/&quot;</span> /lib/systemd/system/vncserver@.service
+sed -r -i <span class="s2">&quot;s/^(PIDFile.*)home\/&lt;USER&gt;(.*pid)/\1root\2/&quot;</span> /lib/systemd/system/vncserver@.service
+
+mv /lib/systemd/system/vncserver@.service /lib/systemd/system/vncserver@:1.service
+systemctl daemon-reload
+vncpasswd
+systemctl start vncserver@:1.service
+systemctl <span class="nb">enable</span> vncserver@:1.service
+
+<span class="c1"># 屏蔽默认桌面，启动mate桌面</span>
+sed -r -i <span class="s2">&quot;s@^/etc/X11/xinit/xinitrc</span><span class="nv">$@</span><span class="s2"># &amp;@&quot;</span> /root/.vnc/xstartup
+<span class="nb">echo</span> <span class="s2">&quot;/usr/bin/mate-session &amp;&quot;</span> &gt;&gt; /root/.vnc/xstartup
+
+<span class="c1"># 其它操作</span>
+<span class="c1"># 禁用selinux</span>
+sed -r -i <span class="s2">&quot;s/^(SELINUX=).*/\1disabled/&quot;</span> /etc/selinux/config
+<span class="c1"># 关闭防火墙</span>
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+
+reboot
+
+<span class="c1"># 如果是云服务器，需要确保开放了TCP 5901端口</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos7-6-vscode">
+<h2>centos7.6 安装vscode<a class="headerlink" href="#centos7-6-vscode" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sh -c <span class="s1">&#39;echo -e &quot;[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot; &gt; /etc/yum.repos.d/vscode.repo&#39;</span>
+yum check-update
+yum install code -y
+</pre></div>
+</div>
+</div>
+<div class="section" id="centos7-6-gcc9-1-0">
+<h2>centos7.6 升级gcc9.1.0版本<a class="headerlink" href="#centos7-6-gcc9-1-0" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yum install gcc gcc-c++ bzip2 m4 -y
+
+tar -jxvf gcc-9.1.0.tar.bz2
+./contrib/download_prerequisites
+
+<span class="nb">cd</span> gmp<span class="p">;</span>mkdir temp<span class="p">;</span><span class="nb">cd</span> temp
+../configure --prefix<span class="o">=</span>/usr/local/gmp-6.1.0
+make
+make install
+<span class="nb">cd</span> ../..
+
+<span class="nb">cd</span> mpfr<span class="p">;</span>mkdir temp<span class="p">;</span><span class="nb">cd</span> temp
+../configure --prefix<span class="o">=</span>/usr/local/mpfr-3.1.4 --with-gmp<span class="o">=</span>/usr/local/gmp-6.1.0
+make
+make install
+<span class="nb">cd</span> ../..
+
+<span class="nb">cd</span> mpc<span class="p">;</span>mkdir temp<span class="p">;</span><span class="nb">cd</span> temp
+../configure --prefix<span class="o">=</span>/usr/local/mpc-1.0.3 --with-gmp<span class="o">=</span>/usr/local/gmp-6.1.0 --with-mpfr<span class="o">=</span>/usr/local/mpfr-3.1.4
+make
+make install
+<span class="nb">cd</span> ../..
+
+vim /etc/profile
+<span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/usr/local/mpc-1.0.3/lib:/usr/local/gmp-6.1.0/lib:/usr/local/mpfr-3.1.4/lib
+
+mkdir temp<span class="p">;</span><span class="nb">cd</span> temp
+../configure --disable-multilib --enable-languages<span class="o">=</span>c,c++ --with-gmp<span class="o">=</span>/usr/local/gmp-6.1.0 --with-mpfr<span class="o">=</span>/usr/local/mpfr-3.1.4 --witpc<span class="o">=</span>/usr/local/mpc-1.0.3
+make
+make install
+</pre></div>
+</div>
+<p>gcc需要9.1.0以上的版本，否则在编译vnpy的时候，会报-std=c++17相关的错误。
+gcc编译时间很长，估计得几个小时。</p>
+</div>
+<div class="section" id="id1">
+<h2>centos7.6 编译vnpy<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># 切换到python环境</span>
+. anaconda3/bin/activate
+yum install postgresql-devel* libxkbcommon-x11 -y
+<span class="nb">cd</span> vnpy
+bash install.sh
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Indices and tables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, 木头哥
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
